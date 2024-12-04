@@ -16,23 +16,14 @@ namespace ValesApp.Models
 
         public string lastName { get; private set; }
 
-        private Regex regex = new Regex("^[0-9]+$");
+        private Regex regex = new Regex("^\\d{10}$");
 
-        public Clients(string phoneNumber, string name, string lastName) => (this.phoneNumber, this.name, this.lastName) = 
+        public Clients(string phoneNumber, string name, string lastName) => (this.phoneNumber, this.name, this.lastName) =
             (
-                validNumber(phoneNumber)? phoneNumber: throw new ArgumentException("Se ingreso un numero invalido"),
+                string.IsNullOrWhiteSpace(phoneNumber) || !regex.IsMatch(phoneNumber) ? throw new ArgumentException("Numero no valido"): phoneNumber,
                 string.IsNullOrWhiteSpace(name.Trim())? throw new ArgumentException("No se ingreso un nombre"): name,
                 string.IsNullOrWhiteSpace(lastName.Trim())? throw new ArgumentException("No se ingreso un apellido"):lastName
             );
-
-
-        private bool validNumber(string number)
-        {
-
-            return string.IsNullOrWhiteSpace(number) ? throw new ArgumentException("No se ingreso un numero")
-                : regex.IsMatch(number); 
-
-        }
 
     }
 }
