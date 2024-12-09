@@ -18,7 +18,13 @@ namespace ValesApp
 
             try
             {
-                Clients client = new Clients("asdasd", "Kevin", "Licon");
+                Loans loan = new Loans("Prestamo Maria Guadalupe", 500, 7, "6141242112");
+
+                Clients clients = new Clients("6141967125", "Kevin", "Licon");
+
+                MessageBox.Show(clients.lastName);
+
+                MessageBox.Show(loan.description);
             }
             catch (Exception ex)
             {
